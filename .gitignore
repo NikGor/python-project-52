@@ -1,0 +1,25 @@
+# Игнорирование папки .idea
+.idea/
+# Игнорирование файла базы данных
+task_manager/db.sqlite3
+# Игнорирование файла блокировки пакетов poetry.lock
+poetry.lock
+# Игнорирование папки __pycache__
+__pycache__/
+# Игнорирование скомпилированных файлов Python
+*.pyc
+*.pyo
+*.pyd
+
+# Игнорирование локальных конфигурационных файлов IDE
+*.bak
+*.swp
+*~
+.DS_Store
+
+*.egg-info
+dist/
+.venv/
+.coverage
+coverage.xml
+.pytest_cache/
