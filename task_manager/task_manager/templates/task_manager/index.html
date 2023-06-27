@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="jumbotron">
+      <h1 class="display-4">Добро пожаловать в менеджер задач!</h1>
+      <p class="lead">Это простой и эффективный инструмент для управления вашими задачами.</p>
+      <hr class="my-4">
+      <p>Вы можете создавать, редактировать и удалять задачи, а также отслеживать их статус.</p>
+      <a class="btn btn-primary btn-lg" href="{% url 'user_list' %}" role="button">Посмотреть пользователей</a>
+    </div>
+  </div>
+{% endblock %}
