@@ -1,0 +1,33 @@
+{% extends 'task_manager/layout.html' %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя пользователя</th>
+                <th>Полное имя</th>
+                <th>Дата создания</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Управление задачами">
+                        <button type="button" class="btn btn-outline-dark">Изменить</button>
+                        <button type="button" class="btn btn-outline-dark">Удалить</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

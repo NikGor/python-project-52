@@ -1,13 +1,41 @@
-{% load bootstrap4 %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% bootstrap_css %}
-    <title>Hexlet Code</title>
-  </head>
-  <body>
-    <!-- Your HTML code here -->
-  </body>
-</html>
+{% extends "task_manager/layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Преимущества менеджера задач Tacticus</h2>
+
+    <div class="my-4"></div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p class="d-flex align-items-center justify-content-center">Управляйте своими задачами эффективно и организованно. Tacticus предоставляет удобный интерфейс, который позволяет вам легко создавать, назначать и отслеживать задачи. Никогда не забудьте важное дело!</p>
+      </div>
+      <div class="col-md-6">
+        <div class="placeholder">
+          <img src="static/screen1.png" alt="Заглушка" class="img-fluid">
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="placeholder">
+          <img src="static/screen1.png" alt="Заглушка" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <p>Будьте в курсе своего прогресса. Tacticus предлагает наглядные диаграммы и отчеты, которые помогут вам оценить свою продуктивность и достичь поставленных целей. Всегда будьте на шаг впереди!</p>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p>Сотрудничайте с командой без усилий. Tacticus позволяет вам легко делиться задачами, присваивать исполнителей и отслеживать прогресс работы. Более эффективная командная работа никогда не была такой простой!</p>
+      </div>
+      <div class="col-md-6">
+        <div class="placeholder">
+          <img src="static/screen1.png" alt="Заглушка" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
