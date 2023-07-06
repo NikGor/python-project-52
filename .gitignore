@@ -24,3 +24,5 @@ dist/
 coverage.xml
 .pytest_cache/
 user_data
+.gitignore
+.env

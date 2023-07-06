@@ -1,14 +1,16 @@
 {% extends 'task_manager/layout.html' %}
 
+{% load i18n %}
 {% block content %}
 <div class="container">
+    <h1 class="my-4">Пользователи</h1>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Имя пользователя</th>
-                <th>Полное имя</th>
-                <th>Дата создания</th>
+                <th>{% trans "Имя пользователя" %}</th>
+                <th>{% trans "Полное имя" %}</th>
+                <th>{% trans "Дата создания" %}</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,10 +22,12 @@
                 <td>{{ user.get_full_name }}</td>
                 <td>{{ user.date_joined }}</td>
                 <td>
+                <td>
                     <div class="btn-group" role="group" aria-label="Управление задачами">
-                        <button type="button" class="btn btn-outline-dark">Изменить</button>
-                        <button type="button" class="btn btn-outline-dark">Удалить</button>
+                        <a href="{% url 'users:update_user' user.id %}" class="btn btn-outline-dark">{% trans "Изменить" %}</a>
+                        <a href="{% url 'users:delete_user' user.id %}" class="btn btn-outline-dark">{% trans "Удалить" %}</a>
                     </div>
+                </td>
                 </td>
             </tr>
             {% endfor %}

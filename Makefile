@@ -1,21 +1,45 @@
-install:
-	poetry install
+.PHONY: run
+run:
+	python3 manage.py runserver
 
+.PHONY: makemigrations
+makemigrations:
+	python3 manage.py makemigrations
+
+.PHONY: migrate
+migrate:
+	python3 manage.py migrate
+
+.PHONY: test
 test:
-	poetry run pytest
+	python3 manage.py test
 
-test-coverage:
-	poetry run pytest --cov=hexlet_python_package --cov-report xml
+.PHONY: shell
+shell:
+	python3 manage.py shell
 
-lint:
-	poetry run flake8 hexlet_python_package
+.PHONY: check
+check:
+	python3 manage.py check
 
-selfcheck:
-	poetry check
+.PHONY: createsuperuser
+createsuperuser:
+	python3 manage.py createsuperuser
 
-check: selfcheck test lint
+.PHONY: collectstatic
+collectstatic:
+	python3 manage.py collectstatic
 
-build: check
-	poetry build
+.PHONY: makemessages
+makemessages:
+	django-admin makemessages -l ru
 
-.PHONY: install test lint selfcheck check build
+.PHONY: compilemessages
+compilemessages:
+	django-admin compilemessages
+
+build:
+	docker build -t your-image-name .
+
+run:
+	docker run -p 8000:8000 your-image-name

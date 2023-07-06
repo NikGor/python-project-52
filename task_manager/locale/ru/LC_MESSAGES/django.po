@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-07 19:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: templates/task_manager/layout.html:20
+msgid "Пользователи"
+msgstr "Users"
+
+#: templates/task_manager/layout.html:23
+msgid "Статусы"
+msgstr "Statuses"
+
+#: templates/task_manager/layout.html:26
+msgid "Метки"
+msgstr "Labels"
+
+#: templates/task_manager/layout.html:29
+msgid "Задачи"
+msgstr "Tasks"
+
+#: templates/task_manager/layout.html:37 templates/users/login.html:17
+msgid "Войти"
+msgstr "Login"
+
+#: templates/task_manager/layout.html:40 templates/users/login.html:21
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: templates/task_manager/layout.html:53
+msgid "Проект выполняется на учебной платформе"
+msgstr "The project is being developed on an educational platform"
+
+#: templates/task_manager/layout.html:54
+msgid "Автор Николай Гордиенко"
+msgstr "Author Nikolay Gordienko"
+
+#: templates/users/delete_user.html:5
+msgid "Удаление пользователя"
+msgstr "Delete User"
+
+#: templates/users/delete_user.html:8
+msgid "Вы уверены, что хотите удалить пользователя"
+msgstr "Are you sure you want to delete the user?"
+
+#: templates/users/delete_user.html:9 templates/users/users.html:27
+msgid "Удалить"
+msgstr "Delete"
+
+#: templates/users/login.html:5
+msgid "Вход в систему"
+msgstr "Log in to the system"
+
+#: templates/users/login.html:9 templates/users/register.html:9
+#: templates/users/update_user.html:9
+msgid "Имя пользователя:"
+msgstr "Username:"
+
+#: templates/users/login.html:13 templates/users/register.html:21
+#: templates/users/update_user.html:21
+msgid "Пароль:"
+msgstr "Password:"
+
+#: templates/users/login.html:20
+msgid "Не зарегистрированы в системе?"
+msgstr "Not registered in the system?"
+
+#: templates/users/register.html:5
+msgid "Регистрация нового пользователя"
+msgstr "Register a new user"
+
+#: templates/users/register.html:13 templates/users/update_user.html:13
+msgid "Имя:"
+msgstr "Name:"
+
+#: templates/users/register.html:17 templates/users/update_user.html:17
+msgid "Фамилия:"
+msgstr "Surname:"
+
+#: templates/users/register.html:25 templates/users/update_user.html:25
+msgid "Подтверждение пароля:"
+msgstr "Confirm Password:"
+
+#: templates/users/register.html:29
+msgid "Создать"
+msgstr "Create"
+
+#: templates/users/update_user.html:5
+msgid "Редактирование пользователя"
+msgstr "Edit User"
+
+#: templates/users/update_user.html:29
+msgid "Обновить"
+msgstr "Update"
+
+#: templates/users/users.html:10
+msgid "Имя пользователя"
+msgstr "Username"
+
+#: templates/users/users.html:11
+msgid "Полное имя"
+msgstr "Full Name"
+
+#: templates/users/users.html:12
+msgid "Дата создания"
+msgstr "Creation Date"
+
+#: templates/users/users.html:26
+msgid "Изменить"
+msgstr "Edit"
