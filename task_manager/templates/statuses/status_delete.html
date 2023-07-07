@@ -1,0 +1,13 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h2>{% trans "Удаление статуса" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>{% trans "Вы уверены, что хотите удалить статус" %}{{ status.name }}?</p>
+        <button type="submit" class="btn btn-danger">{% trans "Удалить" %}</button>
+    </form>
+</div>
+{% endblock %}

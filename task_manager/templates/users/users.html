@@ -23,12 +23,15 @@
                 <td>{{ user.date_joined }}</td>
                 <td>
                 <td>
-                    <div class="btn-group" role="group" aria-label="Управление задачами">
+                    <div class="btn-group" role="group" aria-label="Управление пользователями">
                         <a href="{% url 'users:update_user' user.id %}" class="btn btn-outline-dark">{% trans "Изменить" %}</a>
                         <a href="{% url 'users:delete_user' user.id %}" class="btn btn-outline-dark">{% trans "Удалить" %}</a>
                     </div>
                 </td>
-                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">{% trans "Нет пользователей." %}</td>
             </tr>
             {% endfor %}
         </tbody>
