@@ -2,8 +2,7 @@
 .idea/
 # Игнорирование файла базы данных
 task_manager/db.sqlite3
-# Игнорирование файла блокировки пакетов poetry.lock
-poetry.lock
+task_manager/db.sqlite3.backup
 # Игнорирование папки __pycache__
 __pycache__/
 # Игнорирование скомпилированных файлов Python
@@ -26,4 +25,7 @@ coverage.xml
 user_data
 .gitignore
 .env
+migrations/
+db.sqlite3
+data.json
 

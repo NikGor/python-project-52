@@ -1,0 +1,75 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">
+    {% trans "Метки" %}
+  </h1>
+
+  <div class="form-group m-4 ml-auto">
+    <a href="{% url 'labels:label_create' %}" class="btn btn-outline-dark">{% trans "Создать метку" %}</a>
+  </div>
+
+  <!-- Форма фильтрации -->
+  <form method="get" class="mb-4 mt-3 col-md-6">
+    <div class="form-row mb-3">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Имя метки" name="name">
+      </div>
+    </div>
+    <div class="form-row mb-3">
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="not_used" name="not_used">
+          <label class="form-check-label" for="not_used">
+            Только неиспользованные метки
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-3">
+      <div class="col">
+        <button type="submit" class="btn btn-outline-dark">Фильтровать</button>
+      </div>
+    </div>
+  </form>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{% trans "ID" %}</th>
+        <th>{% trans "Имя" %}</th>
+        <th>{% trans "Дата создания" %}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for label in labels %}
+        <tr>
+          <td>{{ label.id }}</td>
+          <td>{{ label.name }}</td>
+          <td>{{ label.created_at }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Действия">
+              <a href="{% url 'labels:label_update' label.id %}" class="btn btn-link">
+                <i class="bi bi-pencil text-secondary"></i>
+              </a>
+              <a href="{% url 'labels:label_delete' label.id %}" class="btn btn-link">
+                <i class="bi bi-trash text-secondary"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">{% trans "Нет меток." %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="mb-5"></div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+{% block content %}
+<div class="container">
+
+  <h1 class="my-4">
+    {% trans "Просмотр задачи" %}
+  </h1>
+
+  <div class="card col-sm-8 col-md-6 col-lg-4">
+    <div class="card-header d-flex bg-secondary text-white justify-content-between">
+      <h5 class="card-title">{{ task.name }}</h5>
+      <div class="btn-group" role="group" aria-label="Действия">
+        <a href="{% url 'tasks:task_update' task.id %}" class="btn btn-link">
+          <i class="bi bi-pencil text-white"></i>
+        </a>
+        <a href="{% url 'tasks:task_delete' task.id %}" class="btn btn-link">
+          <i class="bi bi-trash text-white"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="text-muted bg-white pb-2 mb-3">
+        <div class="d-flex justify-content-between">
+          <div class="small">{% trans "Исполнитель" %}: {{ task.assignee.username }}</div>
+          <div class="small">{% trans "Статус" %}: {{ task.status.name }}</div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="small">{% trans "Автор" %}: {{ task.author.username }}</div>
+          <div class="small">{% trans "Создана" %}: {{ task.created_at }}</div>
+        </div>
+      </div>
+      <hr class="my-2">
+      <p class="card-text">{{ task.description }}</p>
+      <div class="card-footer text-muted pt-2">
+        {% for label in task.labels.all %}
+          <span class="badge bg-secondary rounded-pill">{{ label.name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
