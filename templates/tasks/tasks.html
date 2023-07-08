@@ -1,0 +1,115 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">
+    {% trans "Задачи" %}
+  </h1>
+
+  <div class="form-group m-4 ml-auto">
+    <a href="{% url 'tasks:task_create' %}" class="btn btn-outline-dark">{% trans "Создать задачу" %}</a>
+  </div>
+
+ <!-- Форма фильтрации -->
+<form method="get" class="mb-4 mt-3 col-md-6">
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_name">Имя задачи</label>
+            <input type="text" class="form-control" placeholder="Имя задачи" name="name" value="{{ request.GET.name }}">
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_status">Статус</label>
+              <select class="form-control" name="status">
+                <option selected></option>
+                {% for status in statuses %}
+                  <option value="{{ status.id }}" {% if request.GET.status == status.id|stringformat:"s" %}selected{% endif %}>{{ status.name }}</option>
+                {% endfor %}
+              </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_executor">Исполнитель</label>
+            <select class="form-control" name="executor" id="id_executor">
+                <option selected></option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if request.GET.executor == user.id|stringformat:"s" %}selected{% endif %}>{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_label">Метка</label>
+            <select class="form-control" name="label" id="id_label">
+                <option selected></option>
+                {% for label in labels %}
+                    <option value="{{ label.id }}" {% if request.GET.label == label.id|stringformat:"s" %}selected{% endif %}>{{ label.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="id_self_tasks" name="self_tasks" {% if request.GET.only_mine == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="id_self_tasks">
+                    Только свои задачи
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <button type="submit" class="btn btn-outline-dark">Показать</button>
+        </div>
+    </div>
+</form>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{% trans "ID" %}</th>
+        <th>{% trans "Имя" %}</th>
+        <th>{% trans "Статус" %}</th>
+        <th>{% trans "Автор" %}</th>
+        <th>{% trans "Исполнитель" %}</th>
+        <th>{% trans "Дата создания" %}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.id }}</td>
+          <td><a href="{% url 'tasks:task_detail' task.id %}">{{ task.name }}</a></td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.author }}</td>
+          <td>{{ task.assignee }}</td>
+          <td>{{ task.created_at }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Действия">
+              <a href="{% url 'tasks:task_update' task.id %}" class="btn btn-link">
+                <i class="bi bi-pencil text-secondary"></i>
+              </a>
+              <a href="{% url 'tasks:task_delete' task.id %}" class="btn btn-link">
+                <i class="bi bi-trash text-secondary"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="7">{% trans "Нет задач." %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="mb-5"></div>
+{% endblock %}

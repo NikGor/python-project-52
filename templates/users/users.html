@@ -1,0 +1,45 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Пользователи</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>{% trans "Имя пользователя" %}</th>
+                <th>{% trans "Полное имя" %}</th>
+                <th>{% trans "Дата создания" %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>
+                <td>
+                <div class="btn-group" role="group" aria-label="Действия">
+                  <a href="{% url 'users:update_user' user.id %}" class="btn btn-link">
+                    <i class="bi bi-pencil text-secondary"></i>
+                  </a>
+                  <a href="{% url 'users:delete_user' user.id %}" class="btn btn-link">
+                    <i class="bi bi-trash text-secondary"></i>
+                  </a>
+                </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">{% trans "Нет пользователей." %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="mb-5"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">
+    {% trans "Удалить метку" %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">{% trans "Удалить" %} {{ label.name }}</button>
+    <a href="{% url 'labels:label_list' %}" class="btn btn-secondary">{% trans "Отмена" %}</a>
+  </form>
+</div>
+{% endblock %}

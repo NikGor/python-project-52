@@ -1,8 +1,10 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/NikGor/python-project-52/workflows/hexlet-check/badge.svg)](https://github.com/NikGor/python-project-52/actions)
+![GitHub Workflow Status](https://github.com/NikGor/python-project-52/actions/workflows/python-app.yml/badge.svg)
 
-# 🌟 Python Django Project 🌟
-Welcome to the Python Django Project! This project is a simple task manager, where users can register, login, update their profiles, and delete their accounts.
+# 🌟 Task Manager 🌟
+This project is a simple task manager, where users can register, login, update their profiles, and delete their 
+accounts. Users can also create, update, and delete tasks with statuses and labels. The project is deployed on Railway.
 
 ## 🚀 Getting Started
 
