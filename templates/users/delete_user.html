@@ -1,0 +1,14 @@
+{% extends 'task_manager/layout.html' %}
+
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h2>{% trans "Удаление пользователя" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>{% trans "Вы уверены, что хотите удалить пользователя" %}{{ user.username }}?</p>
+        <button type="submit" class="btn btn-danger">{% trans "Удалить" %}</button>
+        <a href="{% url 'users:users' %}" class="btn btn-secondary">{% trans "Отмена" %}</a>
+    </form>
+</div>
+{% endblock %}

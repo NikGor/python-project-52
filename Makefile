@@ -1,45 +1,26 @@
-.PHONY: run
-run:
-	python3 manage.py runserver
+.PHONY: install test lint run clean
 
-.PHONY: makemigrations
-makemigrations:
-	python3 manage.py makemigrations
+install:
+	poetry install
 
-.PHONY: migrate
-migrate:
-	python3 manage.py migrate
-
-.PHONY: test
 test:
-	python3 manage.py test
+	poetry run python manage.py test
 
-.PHONY: shell
-shell:
-	python3 manage.py shell
+lint:
+	poetry run flake8 task_manager
 
-.PHONY: check
-check:
-	python3 manage.py check
+run:
+	poetry run python manage.py runserver
 
-.PHONY: createsuperuser
-createsuperuser:
-	python3 manage.py createsuperuser
+clean:
+	find . -name "*.pyc" -delete
 
-.PHONY: collectstatic
-collectstatic:
-	python3 manage.py collectstatic
-
-.PHONY: makemessages
-makemessages:
-	django-admin makemessages -l ru
-
-.PHONY: compilemessages
-compilemessages:
-	django-admin compilemessages
+add-and-commit:
+	git add .
+	git commit --amend --no-edit
+	git push --force
 
 build:
-	docker build -t your-image-name .
+	docker build -t django-app .
 
-run:
-	docker run -p 8000:8000 your-image-name
+
