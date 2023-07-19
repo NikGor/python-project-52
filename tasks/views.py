@@ -31,6 +31,8 @@ def tasks(request):
         label_filter = form.cleaned_data.get('labels')
         only_mine = form.cleaned_data.get('only_mine')
 
+        if only_mine:
+            tasks = tasks.filter(author=request.user)
         if status_filter:
             tasks = tasks.filter(status=status_filter)
         if assignee_filter:
@@ -39,8 +41,6 @@ def tasks(request):
             tasks = tasks.filter(name__icontains=name_search)
         if label_filter:
             tasks = tasks.filter(labels__in=label_filter)
-        if only_mine:
-            tasks = tasks.filter(author=request.user)
 
     return render(request, 'tasks/tasks.html', {'form': form,
                                                 'tasks': tasks,
