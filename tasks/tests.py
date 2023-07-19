@@ -109,4 +109,3 @@ class TaskCRUDTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'testtask')
         self.assertContains(response, 'testtask2')
-

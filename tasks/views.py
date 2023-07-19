@@ -31,8 +31,10 @@ def tasks(request):
         label_filter = form.cleaned_data.get('labels')
         only_mine = form.cleaned_data.get('only_mine')
 
+
         if only_mine:
             tasks = tasks.filter(author=request.user)
+
         if status_filter:
             tasks = tasks.filter(status=status_filter)
         if assignee_filter:
