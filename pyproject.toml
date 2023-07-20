@@ -20,6 +20,7 @@ dj-database-url = "^2.0.0"
 flake8 = "^6.0.0"
 dj-database-url = "^2.0.0"
 django-test = "^0.4030"
+rollbar = "^0.16.3"
 
 [build-system]
 requires = ["poetry-core"]

@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
+
 def index(request):
     return render(request, 'task_manager/index.html')
 

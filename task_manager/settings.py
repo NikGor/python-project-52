@@ -63,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 
@@ -83,6 +84,13 @@ TEMPLATES = [
         },
     },
 ]
+
+ROLLBAR = {
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -123,12 +131,17 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
+        'rollbar': {
+            'level': 'ERROR',
+            'class': 'rollbar.logger.RollbarHandler',
+        },
     },
     'root': {
-        'handlers': ['console'],
+        'handlers': ['console', 'rollbar'],
         'level': 'DEBUG',
     },
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
