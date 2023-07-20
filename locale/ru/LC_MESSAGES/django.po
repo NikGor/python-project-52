@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-07 19:47+0200\n"
+"POT-Creation-Date: 2023-07-20 21:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,40 +16,382 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: templates/task_manager/layout.html:20
-msgid "Пользователи"
-msgstr "Users"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/task_manager/layout.html:23
-msgid "Статусы"
-msgstr "Statuses"
+#: labels/views.py:29
+#, fuzzy
+#| msgid "Дата создания"
+msgid "Метка успешно создана"
+msgstr "Creation Date"
 
-#: templates/task_manager/layout.html:26
+#: labels/views.py:43
+msgid "Метка успешно изменена"
+msgstr "Метка успешно изменена"
+
+#: labels/views.py:55
+msgid "Невозможно удалить метку, связанную с задачами."
+msgstr "Невозможно удалить метку, связанную с задачами."
+
+#: labels/views.py:58
+msgid "Метка успешно удалена"
+msgstr "Метка успешно удалена"
+
+#: statuses/views.py:21
+msgid "Статус успешно создан"
+msgstr "Статус успешно создан"
+
+#: statuses/views.py:35
+msgid "Статус успешно изменен"
+msgstr "Статус успешно изменен"
+
+#: statuses/views.py:48
+msgid "Статус успешно удален"
+msgstr "Статус успешно удален"
+
+#: statuses/views.py:50
+msgid "Невозможно удалить статус, потому что он используется"
+msgstr "Невозможно удалить статус, потому что он используется"
+
+#: task_manager/views.py:21 users/views.py:81
+msgid "Вы залогинены"
+msgstr "Вы залогинены"
+
+#: task_manager/views.py:24 users/views.py:84
+msgid "Этот аккаунт отключен."
+msgstr "Этот аккаунт отключен."
+
+#: task_manager/views.py:26 users/views.py:86
+#, fuzzy
+#| msgid "Удаление пользователя"
+msgid "Неверное имя пользователя или пароль."
+msgstr "Delete User"
+
+#: task_manager/views.py:37 users/views.py:97
+msgid "Вы разлогинены"
+msgstr "Вы разлогинены"
+
+#: tasks/views.py:65
+msgid "Задача успешно создана"
+msgstr "Задача успешно создана"
+
+#: tasks/views.py:91
+msgid "Задача успешно изменена"
+msgstr "Задача успешно изменена"
+
+#: tasks/views.py:110
+#, fuzzy
+#| msgid "Вы уверены, что хотите удалить пользователя"
+msgid "Задачу может удалить только ее автор"
+msgstr "Are you sure you want to delete the user?"
+
+#: tasks/views.py:114
+msgid "Задача успешно удалена"
+msgstr "Задача успешно удалена"
+
+#: templates/labels/label_create.html:6 templates/labels/labels.html:10
+#, fuzzy
+#| msgid "Создать"
+msgid "Создать метку"
+msgstr "Create"
+
+#: templates/labels/label_create.html:10 templates/labels/label_update.html:10
+#: templates/statuses/status_create.html:10
+#: templates/statuses/status_update.html:10 templates/tasks/task_update.html:9
+#: templates/users/register.html:13 templates/users/update_user.html:13
+msgid "Имя:"
+msgstr "Name:"
+
+#: templates/labels/label_create.html:14
+#: templates/statuses/status_create.html:14
+#: templates/tasks/task_create.html:41 templates/users/register.html:29
+msgid "Создать"
+msgstr "Create"
+
+#: templates/labels/label_delete.html:8
+#, fuzzy
+#| msgid "Удалить"
+msgid "Удалить метку"
+msgstr "Delete"
+
+#: templates/labels/label_delete.html:14
+#: templates/statuses/status_delete.html:10 templates/tasks/task_delete.html:9
+#: templates/users/delete_user.html:9
+msgid "Удалить"
+msgstr "Delete"
+
+#: templates/labels/label_delete.html:15
+#: templates/statuses/status_delete.html:11
+#: templates/tasks/task_delete.html:10 templates/users/delete_user.html:10
+msgid "Отмена"
+msgstr "Отмена"
+
+#: templates/labels/label_update.html:6
+#, fuzzy
+#| msgid "Изменить"
+msgid "Изменение метки"
+msgstr "Edit"
+
+#: templates/labels/label_update.html:14
+#: templates/statuses/status_update.html:14
+#: templates/tasks/task_update.html:41
+msgid "Изменить"
+msgstr "Edit"
+
+#: templates/labels/labels.html:6 templates/task_manager/layout.html:33
+#: templates/tasks/task_create.html:25 templates/tasks/task_update.html:25
 msgid "Метки"
 msgstr "Labels"
 
-#: templates/task_manager/layout.html:29
+#: templates/labels/labels.html:41 templates/statuses/statuses.html:16
+#: templates/tasks/tasks.html:74
+msgid "ID"
+msgstr "ID"
+
+#: templates/labels/labels.html:42 templates/statuses/statuses.html:17
+#: templates/tasks/tasks.html:75
+#, fuzzy
+#| msgid "Имя:"
+msgid "Имя"
+msgstr "Name:"
+
+#: templates/labels/labels.html:43 templates/statuses/statuses.html:18
+#: templates/tasks/tasks.html:79 templates/users/users.html:12
+msgid "Дата создания"
+msgstr "Creation Date"
+
+#: templates/labels/labels.html:66
+msgid "Нет меток."
+msgstr "Нет меток."
+
+#: templates/statuses/status_create.html:6 templates/statuses/statuses.html:10
+#, fuzzy
+#| msgid "Создать"
+msgid "Создать статус"
+msgstr "Create"
+
+#: templates/statuses/status_delete.html:6
+#, fuzzy
+#| msgid "Удаление пользователя"
+msgid "Удаление статуса"
+msgstr "Delete User"
+
+#: templates/statuses/status_delete.html:9
+#, fuzzy
+#| msgid "Вы уверены, что хотите удалить пользователя"
+msgid "Вы уверены, что хотите удалить статус"
+msgstr "Are you sure you want to delete the user?"
+
+#: templates/statuses/status_update.html:6
+#, fuzzy
+#| msgid "Изменить"
+msgid "Изменение статуса"
+msgstr "Edit"
+
+#: templates/statuses/statuses.html:6 templates/task_manager/layout.html:28
+msgid "Статусы"
+msgstr "Statuses"
+
+#: templates/statuses/statuses.html:41
+msgid "Нет статусов."
+msgstr "Нет статусов."
+
+#: templates/task_manager/index.html:7
+msgid "Добро пожаловать в Illuminate, ваш лучший менеджер задач"
+msgstr "Добро пожаловать в Illuminate, ваш лучший менеджер задач"
+
+#: templates/task_manager/index.html:8
+msgid ""
+"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
+"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
+" задачи. Будьте организованы и повышайте свою продуктивность!"
+msgstr ""
+"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
+"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
+" задачи. Будьте организованы и повышайте свою продуктивность!"
+
+#: templates/task_manager/index.html:10 templates/task_manager/index.html:12
+msgid "Начать"
+msgstr "Начать"
+
+#: templates/task_manager/index.html:22
+msgid ""
+"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
+"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
+" задачи. Никогда больше не упускайте важную задачу!"
+msgstr ""
+"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
+"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
+" задачи. Никогда больше не упускайте важную задачу!"
+
+#: templates/task_manager/index.html:30
+msgid ""
+"Оставайтесь в курсе своих задач с помощью Illuminate. Вы можете назначать "
+"статусы своим задачам, чтобы указать их прогресс и приоритет. Используйте "
+"метки для категоризации задач по разным критериям."
+msgstr ""
+"Оставайтесь в курсе своих задач с помощью Illuminate. Вы можете назначать "
+"статусы своим задачам, чтобы указать их прогресс и приоритет. Используйте "
+"метки для категоризации задач по разным критериям."
+
+#: templates/task_manager/index.html:38
+msgid ""
+"Легко сотрудничайте с командой с помощью Illuminate. Вы можете легко "
+"делиться задачами и назначать исполнителей. Более эффективная работа в "
+"команде никогда не была такой простой!"
+msgstr ""
+"Легко сотрудничайте с командой с помощью Illuminate. Вы можете легко "
+"делиться задачами и назначать исполнителей. Более эффективная работа в "
+"команде никогда не была такой простой!"
+
+#: templates/task_manager/index.html:46
+msgid ""
+"Откройте для себя мощь управления задачами с помощью Illuminate. Легко "
+"создавайте, назначайте и отслеживайте задачи, и повышайте свою "
+"продуктивность с удобными фильтрами."
+msgstr ""
+"Откройте для себя мощь управления задачами с помощью Illuminate. Легко "
+"создавайте, назначайте и отслеживайте задачи, и повышайте свою "
+"продуктивность с удобными фильтрами."
+
+#: templates/task_manager/layout.html:22
+msgid "Пользователи"
+msgstr "Users"
+
+#: templates/task_manager/layout.html:38 templates/tasks/tasks.html:6
 msgid "Задачи"
 msgstr "Tasks"
 
-#: templates/task_manager/layout.html:37 templates/users/login.html:17
+#: templates/task_manager/layout.html:49 templates/task_manager/login.html:18
 msgid "Войти"
 msgstr "Login"
 
-#: templates/task_manager/layout.html:40 templates/users/login.html:21
+#: templates/task_manager/layout.html:54 templates/task_manager/login.html:22
 msgid "Зарегистрироваться"
 msgstr "Register"
 
-#: templates/task_manager/layout.html:53
+#: templates/task_manager/layout.html:68
 msgid "Проект выполняется на учебной платформе"
 msgstr "The project is being developed on an educational platform"
 
-#: templates/task_manager/layout.html:54
+#: templates/task_manager/layout.html:69
 msgid "Автор Николай Гордиенко"
 msgstr "Author Nikolay Gordienko"
+
+#: templates/task_manager/login.html:6
+msgid "Вход в систему"
+msgstr "Log in to the system"
+
+#: templates/task_manager/login.html:10 templates/users/register.html:9
+#: templates/users/update_user.html:9
+msgid "Имя пользователя:"
+msgstr "Username:"
+
+#: templates/task_manager/login.html:14 templates/users/register.html:21
+#: templates/users/update_user.html:21
+msgid "Пароль:"
+msgstr "Password:"
+
+#: templates/task_manager/login.html:21
+msgid "Не зарегистрированы в системе?"
+msgstr "Not registered in the system?"
+
+#: templates/tasks/task_create.html:5
+msgid "Создание новой задачи"
+msgstr "Создание новой задачи"
+
+#: templates/tasks/task_create.html:9
+#, fuzzy
+#| msgid "Задачи"
+msgid "Имя задачи:"
+msgstr "Tasks"
+
+#: templates/tasks/task_create.html:13 templates/tasks/task_update.html:13
+msgid "Описание:"
+msgstr "Описание:"
+
+#: templates/tasks/task_create.html:17 templates/tasks/task_update.html:17
+#, fuzzy
+#| msgid "Статусы"
+msgid "Статус:"
+msgstr "Statuses"
+
+#: templates/tasks/task_create.html:33 templates/tasks/task_update.html:33
+msgid "Исполнитель:"
+msgstr "Исполнитель:"
+
+#: templates/tasks/task_delete.html:5
+#, fuzzy
+#| msgid "Удаление пользователя"
+msgid "Удаление задачи"
+msgstr "Delete User"
+
+#: templates/tasks/task_delete.html:8
+#, fuzzy
+#| msgid "Вы уверены, что хотите удалить пользователя"
+msgid "Вы уверены, что хотите удалить задачу"
+msgstr "Are you sure you want to delete the user?"
+
+#: templates/tasks/task_detail.html:7
+msgid "Просмотр задачи"
+msgstr "Просмотр задачи"
+
+#: templates/tasks/task_detail.html:25 templates/tasks/tasks.html:34
+#: templates/tasks/tasks.html:78
+msgid "Исполнитель"
+msgstr "Исполнитель"
+
+#: templates/tasks/task_detail.html:26 templates/tasks/tasks.html:23
+#: templates/tasks/tasks.html:76
+#, fuzzy
+#| msgid "Статусы"
+msgid "Статус"
+msgstr "Statuses"
+
+#: templates/tasks/task_detail.html:29 templates/tasks/tasks.html:77
+msgid "Автор"
+msgstr "Автор"
+
+#: templates/tasks/task_detail.html:30
+#, fuzzy
+#| msgid "Создать"
+msgid "Создана"
+msgstr "Create"
+
+#: templates/tasks/task_update.html:5
+msgid "Изменение задачи"
+msgstr "Изменение задачи"
+
+#: templates/tasks/tasks.html:10
+#, fuzzy
+#| msgid "Создать"
+msgid "Создать задачу"
+msgstr "Create"
+
+#: templates/tasks/tasks.html:17 templates/tasks/tasks.html:18
+#, fuzzy
+#| msgid "Задачи"
+msgid "Имя задачи"
+msgstr "Tasks"
+
+#: templates/tasks/tasks.html:45
+#, fuzzy
+#| msgid "Метки"
+msgid "Метка"
+msgstr "Labels"
+
+#: templates/tasks/tasks.html:59
+msgid "Только свои задачи"
+msgstr "Только свои задачи"
+
+#: templates/tasks/tasks.html:66
+msgid "Показать"
+msgstr "Показать"
+
+#: templates/tasks/tasks.html:105
+#, fuzzy
+#| msgid "Задачи"
+msgid "Нет задач."
+msgstr "Tasks"
 
 #: templates/users/delete_user.html:5
 msgid "Удаление пользователя"
@@ -59,35 +401,9 @@ msgstr "Delete User"
 msgid "Вы уверены, что хотите удалить пользователя"
 msgstr "Are you sure you want to delete the user?"
 
-#: templates/users/delete_user.html:9 templates/users/users.html:27
-msgid "Удалить"
-msgstr "Delete"
-
-#: templates/users/login.html:5
-msgid "Вход в систему"
-msgstr "Log in to the system"
-
-#: templates/users/login.html:9 templates/users/register.html:9
-#: templates/users/update_user.html:9
-msgid "Имя пользователя:"
-msgstr "Username:"
-
-#: templates/users/login.html:13 templates/users/register.html:21
-#: templates/users/update_user.html:21
-msgid "Пароль:"
-msgstr "Password:"
-
-#: templates/users/login.html:20
-msgid "Не зарегистрированы в системе?"
-msgstr "Not registered in the system?"
-
 #: templates/users/register.html:5
 msgid "Регистрация нового пользователя"
 msgstr "Register a new user"
-
-#: templates/users/register.html:13 templates/users/update_user.html:13
-msgid "Имя:"
-msgstr "Name:"
 
 #: templates/users/register.html:17 templates/users/update_user.html:17
 msgid "Фамилия:"
@@ -96,10 +412,6 @@ msgstr "Surname:"
 #: templates/users/register.html:25 templates/users/update_user.html:25
 msgid "Подтверждение пароля:"
 msgstr "Confirm Password:"
-
-#: templates/users/register.html:29
-msgid "Создать"
-msgstr "Create"
 
 #: templates/users/update_user.html:5
 msgid "Редактирование пользователя"
@@ -117,10 +429,34 @@ msgstr "Username"
 msgid "Полное имя"
 msgstr "Full Name"
 
-#: templates/users/users.html:12
-msgid "Дата создания"
-msgstr "Creation Date"
+#: templates/users/users.html:37
+#, fuzzy
+#| msgid "Имя пользователя"
+msgid "Нет пользователей."
+msgstr "Username"
 
-#: templates/users/users.html:26
-msgid "Изменить"
-msgstr "Edit"
+#: users/views.py:20
+msgid "Пользователь успешно зарегистрирован"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: users/views.py:35 users/views.py:59
+msgid "Вы не авторизованы! Пожалуйста, выполните вход."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: users/views.py:38 users/views.py:62
+#, fuzzy
+#| msgid "Регистрация нового пользователя"
+msgid "У вас нет прав для изменения другого пользователя."
+msgstr "Register a new user"
+
+#: users/views.py:44
+#, fuzzy
+#| msgid "Пользователи"
+msgid "Пользователь успешно изменен"
+msgstr "Users"
+
+#: users/views.py:66
+#, fuzzy
+#| msgid "Пользователи"
+msgid "Пользователь успешно удален"
+msgstr "Users"

@@ -6,6 +6,7 @@ from statuses.models import Status
 from users.models import User
 from labels.models import Label
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 
 @login_required
@@ -31,6 +32,8 @@ def tasks(request):
         label_filter = form.cleaned_data.get('labels')
         only_mine = form.cleaned_data.get('only_mine')
 
+        if only_mine:
+            tasks = tasks.filter(author=request.user)
         if status_filter:
             tasks = tasks.filter(status=status_filter)
         if assignee_filter:
@@ -39,8 +42,6 @@ def tasks(request):
             tasks = tasks.filter(name__icontains=name_search)
         if label_filter:
             tasks = tasks.filter(labels__in=label_filter)
-        if only_mine:
-            tasks = tasks.filter(author=request.user)
 
     return render(request, 'tasks/tasks.html', {'form': form,
                                                 'tasks': tasks,
@@ -61,7 +62,7 @@ def task_create(request):
             task.author = request.user
             task.save()
             form.save_m2m()
-            messages.success(request, 'Задача успешно создана')
+            messages.success(request, _('Задача успешно создана'))
             return redirect('tasks:tasks_list')
         else:
             for field, errors in form.errors.items():
@@ -87,7 +88,7 @@ def task_update(request, pk):
             task = form.save(commit=False)
             task.save()
             form.save_m2m()
-            messages.success(request, 'Задача успешно изменена')
+            messages.success(request, _('Задача успешно изменена'))
             return redirect('tasks:tasks_list')
         else:
             for field, errors in form.errors.items():
@@ -106,10 +107,10 @@ def task_update(request, pk):
 def task_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.author != request.user:
-        messages.error(request, "Задачу может удалить только ее автор")
+        messages.error(request, _("Задачу может удалить только ее автор"))
         return redirect('tasks:tasks_list')
     if request.method == 'POST':
         task.delete()
-        messages.success(request, 'Задача успешно удалена')
+        messages.success(request, _('Задача успешно удалена'))
         return redirect('tasks:tasks_list')
     return render(request, 'tasks/task_delete.html', {'task': task})

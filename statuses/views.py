@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Status
 from .forms import StatusForm
+from django.utils.translation import gettext as _
 
 
-# Create your views here.
 @login_required
 def status_list(request):
     statuses = Status.objects.all()
@@ -18,7 +18,7 @@ def status_create(request):
         form = StatusForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Статус успешно создан')
+            messages.success(request, _('Статус успешно создан'))
             return redirect('statuses:status_list')
     else:
         form = StatusForm()
@@ -32,7 +32,7 @@ def status_update(request, pk):
         form = StatusForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Статус успешно изменен')
+            messages.success(request, _('Статус успешно изменен'))
             return redirect('statuses:status_list')
     else:
         form = StatusForm(instance=status)
@@ -45,8 +45,8 @@ def status_delete(request, pk):
     if request.method == 'POST':
         try:
             status.delete()
-            messages.success(request, 'Статус успешно удален')
+            messages.success(request, _('Статус успешно удален'))
         except Exception:
-            messages.error(request, 'Невозможно удалить статус, потому что он используется')
+            messages.error(request, _('Невозможно удалить статус, потому что он используется'))
         return redirect('statuses:status_list')
     return render(request, 'statuses/status_delete.html', {'status': status})

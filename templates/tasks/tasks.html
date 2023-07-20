@@ -1,7 +1,5 @@
 {% extends 'task_manager/layout.html' %}
-
 {% load i18n %}
-
 {% block content %}
 <div class="container">
   <h1 class="my-4">
@@ -12,59 +10,63 @@
     <a href="{% url 'tasks:task_create' %}" class="btn btn-outline-dark">{% trans "Создать задачу" %}</a>
   </div>
 
-  <!-- Форма фильтрации -->
-  <form method="get" class="mb-4 mt-3 col-md-6">
+<!-- Форма фильтрации -->
+<form method="get" class="mb-4 mt-3 col-md-6">
     <div class="form-row mb-3">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Имя задачи" name="name">
-      </div>
-    </div>
-    <div class="form-row mb-3">
-      <div class="col">
-        <select class="form-control" name="status">
-          <option selected></option>
-          {% for status in statuses %}
-            <option value="{{ status.id }}">{{ status.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="form-row mb-3">
-      <div class="col">
-        <select class="form-control" name="assignee">
-          <option selected></option>
-          {% for user in users %}
-            <option value="{{ user.id }}">{{ user.username }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="form-row mb-3">
-      <div class="col">
-        <select class="form-control" name="label">
-          <option selected></option>
-          {% for label in labels %}
-            <option value="{{ label.id }}">{{ label.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="form-row mb-3">
-      <div class="col">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="onlyMine" name="only_mine">
-          <label class="form-check-label" for="onlyMine">
-            Только свои задачи
-          </label>
+        <div class="col">
+            <label class="form-label" for="id_name">{% trans "Имя задачи" %}</label>
+            <input type="text" class="form-control" placeholder="{% trans "Имя задачи" %}" name="name" value="{{ request.GET.name }}">
         </div>
-      </div>
     </div>
     <div class="form-row mb-3">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-dark">Фильтровать</button>
-      </div>
+        <div class="col">
+            <label class="form-label" for="id_status">{% trans "Статус" %}</label>
+              <select class="form-control" name="status">
+                <option selected></option>
+                {% for status in statuses %}
+                  <option value="{{ status.id }}" {% if request.GET.status == status.id|stringformat:"s" %}selected{% endif %}>{{ status.name }}</option>
+                {% endfor %}
+              </select>
+        </div>
     </div>
-  </form>
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_executor">{% trans "Исполнитель" %}</label>
+            <select class="form-control" name="executor" id="id_executor">
+                <option selected></option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if request.GET.executor == user.id|stringformat:"s" %}selected{% endif %}>{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <label class="form-label" for="id_label">{% trans "Метка" %}</label>
+            <select class="form-control" name="label" id="id_label">
+                <option selected></option>
+                {% for label in labels %}
+                    <option value="{{ label.id }}" {% if request.GET.label == label.id|stringformat:"s" %}selected{% endif %}>{{ label.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="id_self_tasks" name="only_mine" {% if request.GET.only_mine == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="id_self_tasks">
+                    {% trans "Только свои задачи" %}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row mb-3">
+        <div class="col">
+            <button type="submit" class="btn btn-outline-dark">{% trans "Показать" %}</button>
+        </div>
+    </div>
+</form>
 
   <table class="table table-striped">
     <thead>

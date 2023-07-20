@@ -67,3 +67,45 @@ class TaskCRUDTest(TestCase):
         response = self.client.post(reverse('tasks:task_delete', args=[self.test_task.id]))
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Task.objects.filter(name='testtask').exists())
+
+    def test_task_filter_form(self):
+        self.client.login(username='DarkSideLord', password='SithLord123')
+        # Создаем дополнительные задачи для тестирования фильтрации
+        test_task2 = Task.objects.create(
+            name='testtask2',
+            description='testdescription2',
+            status=self.test_status,
+            author=self.test_user1,
+            assignee=self.test_user2,
+        )
+        test_task3 = Task.objects.create(
+            name='testtask3',
+            description='testdescription3',
+            status=self.test_status,
+            author=self.test_user2,  # отличается от test_user1
+            assignee=self.test_user1,
+        )
+        # Проверяем фильтрацию по имени задачи
+        response = self.client.get(reverse('tasks:tasks_list'), {'title': 'testtask2'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'testtask2')
+        # Проверяем фильтрацию по исполнителю
+        response = self.client.get(reverse('tasks:tasks_list'), {'assignee': self.test_user1.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'testtask')
+        self.assertContains(response, 'testtask3')
+        # Проверяем фильтрацию по автору
+        response = self.client.get(reverse('tasks:tasks_list'), {'author': self.test_user2.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'testtask3')
+        # Проверяем фильтрацию по статусу
+        response = self.client.get(reverse('tasks:tasks_list'), {'status': self.test_status.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'testtask')
+        self.assertContains(response, 'testtask2')
+        self.assertContains(response, 'testtask3')
+        # Проверяем фильтрацию "только свои задачи"
+        response = self.client.get(reverse('tasks:tasks_list'), {'only_mine': 'on'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'testtask')
+        self.assertContains(response, 'testtask2')

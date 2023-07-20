@@ -28,4 +28,5 @@ user_data
 migrations/
 db.sqlite3
 data.json
-
+locale/ru/LC_MESSAGES/get_translation.py
+locale/ru/LC_MESSAGES/__django.po
