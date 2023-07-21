@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
+from django.views.generic.edit import FormView, DeleteView
+from django.urls import reverse_lazy
 from .models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
@@ -7,92 +10,72 @@ from .forms import RegisterForm
 from django.utils.translation import gettext as _
 
 
-def users(request):
-    users = User.objects.all()
-    return render(request, 'users/users.html', {'users': users})
+class UserListView(View):
+    def get(self, request):
+        users = User.objects.all()
+        return render(request, 'users/users.html', {'users': users})
 
 
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _("Пользователь успешно зарегистрирован"))
-            return redirect('login')
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field.capitalize()}: {error}")
-                    print(form.errors)
-    else:
-        form = RegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+class RegisterView(FormView):
+    form_class = RegisterForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _("Пользователь успешно зарегистрирован"))
+        return super().form_valid(form)
 
 
-def update_user(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if not request.user.is_authenticated:
-        messages.error(request, _("Вы не авторизованы! Пожалуйста, выполните вход."))
-        return redirect('login')
-    if request.user != user:
-        messages.error(request, _("У вас нет прав для изменения другого пользователя."))
-        return redirect('users:users')
-    if request.method == "POST":
-        form = RegisterForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _("Пользователь успешно изменен"))
-            update_session_auth_hash(request, user)
-            return redirect('users:users')
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field.capitalize()}: {error}")
-    else:
-        form = RegisterForm(instance=user)
-    return render(request, 'users/update_user.html', {'form': form})
+class UpdateUserView(FormView):
+    form_class = RegisterForm
+    template_name = 'users/update_user.html'
+    success_url = reverse_lazy('users:users')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'instance': get_object_or_404(User, pk=self.kwargs['pk'])})
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _("Пользователь успешно изменен"))
+        update_session_auth_hash(self.request, form.instance)
+        return super().form_valid(form)
 
 
-def delete_user(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if not request.user.is_authenticated:
-        messages.error(request, _("Вы не авторизованы! Пожалуйста, выполните вход."))
-        return redirect('login')
-    if request.user != user:
-        messages.error(request, _("У вас нет прав для изменения другого пользователя."))
-        return redirect('users:users')
-    if request.method == 'POST':
-        user.delete()
-        messages.success(request, _("Пользователь успешно удален"))
-        return redirect('users:users')
-    return render(request, 'users/delete_user.html', {'user': user})
+class DeleteUserView(DeleteView):
+    model = User
+    template_name = 'users/delete_user.html'
+    success_url = reverse_lazy('users:users')
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Пользователь успешно удален"))
+        return super().form_valid(form)
 
 
-def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    messages.info(request, _("Вы залогинены"))
-                    return redirect("/")
-                else:
-                    messages.error(request, _("Этот аккаунт отключен."))
+class LoginView(FormView):
+    form_class = AuthenticationForm
+    template_name = 'users/login.html'
+    success_url = reverse_lazy('/')
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(self.request, user)
+                messages.info(self.request, _("Вы залогинены"))
             else:
-                messages.error(request, _("Неверное имя пользователя или пароль."))
+                messages.error(self.request, _("Этот аккаунт отключен."))
         else:
-            for field in form:
-                for error in field.errors:
-                    messages.error(request, f"{field.label}: {error}")
-    form = AuthenticationForm()
-    return render(request=request, template_name="users/login.html", context={"form": form})
+            messages.error(self.request, _("Неверное имя пользователя или пароль."))
+        return super().form_valid(form)
 
 
-def logout_view(request):
-    logout(request)
-    messages.success(request, _("Вы разлогинены"))
-    return redirect('login')
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, _("Вы разлогинены"))
+        return redirect('login')
