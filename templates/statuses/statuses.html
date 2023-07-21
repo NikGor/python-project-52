@@ -24,7 +24,7 @@
         <tr>
           <td>{{ status.id }}</td>
           <td>{{ status.name }}</td>
-          <td>{{ status.created_at }}</td>
+          <td>{{ status.created_at|date:"d.m.Y H:i" }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Действия">
               <a href="{% url 'statuses:status_update' status.id %}" class="btn btn-link">

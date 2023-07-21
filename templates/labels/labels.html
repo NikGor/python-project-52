@@ -49,7 +49,7 @@
         <tr>
           <td>{{ label.id }}</td>
           <td>{{ label.name }}</td>
-          <td>{{ label.created_at }}</td>
+          <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Действия">
               <a href="{% url 'labels:label_update' label.id %}" class="btn btn-link">

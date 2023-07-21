@@ -27,7 +27,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <div class="small">{% trans "Автор" %}: {{ task.author.username }}</div>
-          <div class="small">{% trans "Создана" %}: {{ task.created_at }}</div>
+          <div class="small">{% trans "Создана" %}: {{ task.created_at|date:"d.m.Y H:i" }}</div>
         </div>
       </div>
       <hr class="my-2">
