@@ -21,7 +21,7 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3 col-md-6">
             <label for="id_labels">{% trans "Метки" %}</label>
             <select multiple class="form-control" id="id_labels" name="labels">
                 {% for label in labels %}
@@ -31,15 +31,16 @@
         </div>
         <div class="form-group mt-3 col-md-6">
             <label for="id_assignee">{% trans "Исполнитель:" %}</label>
-            <select class="form-control" id="id_assignee" name="assignee">
+            <select class="form-control" id="id_assignee" name="name">
                 {% for user in users %}
                     <option value="{{ user.id }}">{{ user.username }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group mt-4">
-            <button type="submit" class="btn btn-outline-dark">{% trans "Создать" %}</button>
+            <button type="submit" class="btn btn-outline-dark" name="submit">{% trans "Создать" %}</button>
         </div>
     </form>
+
 </div>
 {% endblock %}

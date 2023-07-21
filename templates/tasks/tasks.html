@@ -32,7 +32,7 @@
     <div class="form-row mb-3">
         <div class="col">
             <label class="form-label" for="id_executor">{% trans "Исполнитель" %}</label>
-            <select class="form-control" name="executor" id="id_executor">
+            <select class="form-control" name="name" id="id_executor">
                 <option selected></option>
                 {% for user in users %}
                     <option value="{{ user.id }}" {% if request.GET.executor == user.id|stringformat:"s" %}selected{% endif %}>{{ user.username }}</option>
