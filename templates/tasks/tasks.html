@@ -32,7 +32,7 @@
     <div class="form-row mb-3">
         <div class="col">
             <label class="form-label" for="id_executor">{% trans "Исполнитель" %}</label>
-            <select class="form-control" name="name" id="id_executor">
+            <select class="form-control" name="executor" id="id_executor">
                 <option selected></option>
                 {% for user in users %}
                     <option value="{{ user.id }}" {% if request.GET.executor == user.id|stringformat:"s" %}selected{% endif %}>{{ user.username }}</option>
@@ -87,7 +87,7 @@
           <td><a href="{% url 'tasks:task_detail' task.id %}">{{ task.name }}</a></td>
           <td>{{ task.status }}</td>
           <td>{{ task.author }}</td>
-          <td>{{ task.assignee }}</td>
+          <td>{{ task.executor }}</td>
           <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Действия">

@@ -30,8 +30,8 @@
             </select>
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_assignee">{% trans "Исполнитель:" %}</label>
-            <select class="form-control" id="id_assignee" name="name">
+            <label for="id_executor">{% trans "Исполнитель:" %}</label>
+            <select class="form-control" id="id_executor" name="executor">
                 {% for user in users %}
                     <option value="{{ user.id }}">{{ user.username }}</option>
                 {% endfor %}

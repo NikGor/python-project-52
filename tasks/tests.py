@@ -22,7 +22,7 @@ class TaskCRUDTest(TestCase):
             description='testdescription',
             status=self.test_status,
             author=self.test_user1,
-            assignee=self.test_user2,
+            executor=self.test_user2,
         )
 
     def test_create_task(self):
@@ -33,7 +33,7 @@ class TaskCRUDTest(TestCase):
             'status': self.test_status.id,
             'labels': [self.test_label.id],
             'author': self.test_user1.id,
-            'assignee': self.test_user1.id,
+            'executor': self.test_user1.id,
         })
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Task.objects.filter(name='newtask').exists())
@@ -76,21 +76,21 @@ class TaskCRUDTest(TestCase):
             description='testdescription2',
             status=self.test_status,
             author=self.test_user1,
-            assignee=self.test_user2,
+            executor=self.test_user2,
         )
         test_task3 = Task.objects.create(
             name='testtask3',
             description='testdescription3',
             status=self.test_status,
             author=self.test_user2,  # отличается от test_user1
-            assignee=self.test_user1,
+            executor=self.test_user1,
         )
         # Проверяем фильтрацию по имени задачи
         response = self.client.get(reverse('tasks:tasks_list'), {'title': 'testtask2'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'testtask2')
         # Проверяем фильтрацию по исполнителю
-        response = self.client.get(reverse('tasks:tasks_list'), {'assignee': self.test_user1.id})
+        response = self.client.get(reverse('tasks:tasks_list'), {'executor': self.test_user1.id})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'testtask')
         self.assertContains(response, 'testtask3')
