@@ -27,11 +27,25 @@ class RegisterView(FormView):
         messages.success(self.request, _("Пользователь успешно зарегистрирован"))
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
+
 
 class UpdateUserView(LoginRequiredMixin, FormView):
     form_class = RegisterForm
     template_name = 'users/update_user.html'
     success_url = reverse_lazy('users:users')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.request.user == self.object:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(self.request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect('users:users')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -44,15 +58,35 @@ class UpdateUserView(LoginRequiredMixin, FormView):
         update_session_auth_hash(self.request, form.instance)
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
+
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'users/delete_user.html'
     success_url = reverse_lazy('users:users')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.request.user == self.object:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(self.request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect('users:users')
+
     def form_valid(self, form):
         messages.success(self.request, _("Пользователь успешно удален"))
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
 
 
 class LoginView(FormView):

@@ -35,14 +35,14 @@
   </form>
 
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>{% trans "ID" %}</th>
-        <th>{% trans "Имя" %}</th>
-        <th>{% trans "Дата создания" %}</th>
-        <th></th>
-      </tr>
+  <table class="table table-hover">
+    <thead class="bg-light">
+        <tr>
+            <th width="10%">{% trans "ID" %}</th>
+            <th width="40%">{% trans "Имя" %}</th>
+            <th width="30%">{% trans "Дата создания" %}</th>
+            <th width="20%"></th>
+        </tr>
     </thead>
     <tbody>
       {% for label in labels %}
@@ -51,14 +51,16 @@
           <td>{{ label.name }}</td>
           <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
           <td>
-            <div class="btn-group" role="group" aria-label="Действия">
-              <a href="{% url 'labels:label_update' label.id %}" class="btn btn-link">
-                <i class="bi bi-pencil text-secondary"></i>
-              </a>
-              <a href="{% url 'labels:label_delete' label.id %}" class="btn btn-link">
-                <i class="bi bi-trash text-secondary"></i>
-              </a>
-            </div>
+<!--<div class="btn-group" role="group" aria-label="Действия">-->
+<!--  <a href="{% url 'labels:label_update' label.id %}" class="btn btn-link">-->
+<!--    <i class="bi bi-pencil text-secondary"></i>-->
+<!--  </a>-->
+<!--  <a href="{% url 'labels:label_delete' label.id %}" class="btn btn-link">-->
+<!--    <i class="bi bi-trash text-secondary"></i>-->
+<!--  </a>-->
+<!--</div>-->
+            <a href="{% url 'labels:label_update' label.id %}">Изменить</a><br>
+            <a href="{% url 'labels:label_delete' label.id %}">Удалить</a>
           </td>
         </tr>
       {% empty %}

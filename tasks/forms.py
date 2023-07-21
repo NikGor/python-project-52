@@ -12,8 +12,16 @@ class TaskForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
-    name = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Имя задачи'}))
-    status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False, empty_label="Статус")
-    executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False, empty_label="Исполнитель")
-    labels = forms.ModelChoiceField(queryset=Label.objects.all(), required=False, empty_label="Метка")
-    only_mine = forms.BooleanField(required=False, label="Только мои")
+    name = forms.CharField(max_length=100,
+                           required=False,
+                           widget=forms.TextInput(attrs={'placeholder': 'Имя задачи'}))
+    status = forms.ModelChoiceField(queryset=Status.objects.all(),
+                                    required=False,
+                                    empty_label="---------")
+    executor = forms.ModelChoiceField(queryset=User.objects.all(),
+                                      required=False,
+                                      empty_label="---------")
+    label = forms.ModelChoiceField(queryset=Label.objects.all(),
+                                   required=False, empty_label="Метка")
+    only_mine = forms.BooleanField(required=False,
+                                   label="Только мои")

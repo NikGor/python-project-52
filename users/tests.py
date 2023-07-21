@@ -15,8 +15,8 @@ class UserCRUDTest(TestCase):
             'password1': 'SuchPassword123',
             'password2': 'SuchPassword123',
         })
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
-        self.assertTrue(User.objects.filter(username='DogeToTheMoon').exists())  # Проверяем, что пользователь создан
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(User.objects.filter(username='DogeToTheMoon').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Пользователь успешно зарегистрирован")
 
@@ -29,18 +29,18 @@ class UserCRUDTest(TestCase):
             'password1': 'NewSithLord123',
             'password2': 'NewSithLord123'
         })
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
+        self.assertEqual(response.status_code, 302)
         self.test_user.refresh_from_db()
-        self.assertEqual(self.test_user.username, 'DarthVader')  # Проверяем, что имя пользователя изменилось
+        self.assertEqual(self.test_user.username, 'DarthVader')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Пользователь успешно изменен")
 
     def test_delete_user(self):
         self.client.login(username='DarkSideLord', password='SithLord123')
         response = self.client.post(reverse('users:delete_user', args=[self.test_user.id]))
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
+        self.assertEqual(response.status_code, 302)
         self.assertFalse(User.objects.filter(
-            username='DarkSideLord').exists())  # Проверяем, что пользователя больше нет в базе данных
+            username='DarkSideLord').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Пользователь успешно удален")
 
@@ -52,7 +52,7 @@ class UserCRUDTest(TestCase):
             'username': username,
             'password': password,
         })
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
+        self.assertEqual(response.status_code, 302)
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Вы залогинены")
 

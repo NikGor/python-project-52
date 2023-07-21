@@ -8,6 +8,9 @@
 This project is a simple task manager, where users can register, login, update their profiles, and delete their 
 accounts. Users can also create, update, and delete tasks with statuses and labels. The project is deployed on Railway.
 
+You can check out the live deployment of the Task Manager on Railway by following this link: [Task Manager - Deployed on Railway](https://python-project-52-production.up.railway.app/)
+
+
 ## 🚀 Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

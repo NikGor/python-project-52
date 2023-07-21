@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-1">
   <div class="row">
-    <div class="col-md-8 offset-md-2 text-center">
+    <div class="col-12 text-center">
       <h2 class="my-3">{% trans "Добро пожаловать в Illuminate, ваш лучший менеджер задач" %}</h2>
       <p class="lead">{% trans "Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, удобный для пользователя, позволяет легко создавать, назначать и отслеживать задачи. Будьте организованы и повышайте свою продуктивность!" %}</p>
       {% if user.is_authenticated %}
@@ -15,7 +15,7 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-6 col-sm-6">
       <div class="card border-0">
         <img src="/static/bulb1.png" alt="bulb" class="card-img">
         <div class="card-body">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-6 col-sm-6">
       <div class="card border-0">
         <img src="/static/bulb2.png" alt="bulb" class="card-img">
         <div class="card-body">
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-6 col-sm-6">
       <div class="card border-0">
         <img src="/static/bulb3.png" alt="bulb" class="card-img">
         <div class="card-body">
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-6 col-sm-6">
       <div class="card border-0">
         <img src="/static/bulb4.png" alt="bulb" class="card-img">
         <div class="card-body">
@@ -49,5 +49,6 @@
     </div>
   </div>
 </div>
+<div class="mb-5"></div>
 <div class="mb-5"></div>
 {% endblock %}

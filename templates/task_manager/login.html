@@ -7,11 +7,11 @@
     <form method="post">
         {% csrf_token %}
         <div class="form-group mt-3 col-md-6">
-            <label for="id_username">{% trans "Имя пользователя:" %}</label>
+            <label for="id_username">{% trans "Имя пользователя" %}</label>
             <input type="text" class="form-control" id="id_username" name="username">
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_password">{% trans "Пароль:" %}</label>
+            <label for="id_password">{% trans "Пароль" %}</label>
             <input type="password" class="form-control" id="id_password" name="password">
         </div>
         <div class="form-group mt-4 ml-auto">

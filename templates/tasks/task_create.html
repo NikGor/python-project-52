@@ -2,38 +2,38 @@
 {% load i18n %}
 {% block content %}
 <div class="container">
-    <h2>{% trans "Создание новой задачи" %}</h2>
+    <h2>{% trans "Создать задачу" %}</h2>
     <form method="post">
         {% csrf_token %}
         <div class="form-group mt-3 col-md-6">
-            <label for="id_name">{% trans "Имя задачи:" %}</label>
+            <label for="id_name">{% trans "Имя" %}</label>
             <input type="text" class="form-control" id="id_name" name="name">
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_description">{% trans "Описание:" %}</label>
-            <input type="text" class="form-control" id="id_description" name="description">
+          <label for="id_description">{% trans "Описание" %}</label>
+          <textarea class="form-control" id="id_description" name="description" rows="5"></textarea>
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_status">{% trans "Статус:" %}</label>
-            <select class="form-control" id="id_status" name="status">
+            <label class="form-label" for="id_status">{% trans "Статус" %}</label>
+            <select class="form-select" id="id_status" name="status">
                 {% for status in statuses %}
                     <option value="{{ status.id }}">{{ status.name }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_labels">{% trans "Метки" %}</label>
-            <select multiple class="form-control" id="id_labels" name="labels">
-                {% for label in labels %}
-                    <option value="{{ label.id }}">{{ label.name }}</option>
+            <label for="id_executor" class="form-label">{% trans "Исполнитель" %}</label>
+            <select class="form-select" id="id_executor" name="executor">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.get_full_name|default:user.username }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group mt-3 col-md-6">
-            <label for="id_executor">{% trans "Исполнитель:" %}</label>
-            <select class="form-control" id="id_executor" name="executor">
-                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
+            <label for="id_labels">{% trans "Метки" %}</label>
+            <select multiple class="form-select" id="id_labels" name="labels">
+                {% for label in labels %}
+                    <option value="{{ label.id }}">{{ label.name }}</option>
                 {% endfor %}
             </select>
         </div>
