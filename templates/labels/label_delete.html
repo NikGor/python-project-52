@@ -11,7 +11,7 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-danger">{% trans "Удалить" %} {{ label.name }}</button>
+    <button type="submit" class="btn btn-danger">{% trans "Да, удалить" %}</button>
     <a href="{% url 'labels:label_list' %}" class="btn btn-secondary">{% trans "Отмена" %}</a>
   </form>
 </div>

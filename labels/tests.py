@@ -16,33 +16,37 @@ class LabelCRUDTest(TestCase):
 
     def test_create_label(self):
         response = self.client.post(reverse('labels:label_create'), {'name': 'newlabel'})
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
-        self.assertTrue(Label.objects.filter(name='newlabel').exists())  # Проверяем, что метка создана
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Label.objects.filter(name='newlabel').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Метка успешно создана")
 
     def test_update_label(self):
-        response = self.client.post(reverse('labels:label_update', kwargs={'pk': self.test_label.pk}), {'name': 'updatedlabel'})
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
+        response = self.client.post(reverse('labels:label_update',
+                                            kwargs={'pk': self.test_label.pk}),
+                                    {'name': 'updatedlabel'})
+        self.assertEqual(response.status_code, 302)
         self.test_label.refresh_from_db()
-        self.assertEqual(self.test_label.name, 'updatedlabel')  # Проверяем, что имя метки обновлено
+        self.assertEqual(self.test_label.name, 'updatedlabel')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Метка успешно изменена")
 
     def test_delete_label(self):
         # Если есть связанные задачи, проверьте сообщение об ошибке
         if self.test_label.tasks.exists():
-            response = self.client.post(reverse('labels:label_delete', kwargs={'pk': self.test_label.pk}), follow=True)
-            self.assertEqual(response.status_code, 200)  # Проверяем, что запрос успешно выполнен
-            self.assertTrue(Label.objects.filter(name='testlabel').exists())  # Проверяем, что метка не удалена
+            response = self.client.post(reverse('labels:label_delete',
+                                                kwargs={'pk': self.test_label.pk}),
+                                        follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue(Label.objects.filter(name='testlabel').exists())
             messages = list(get_messages(response.wsgi_request))
             self.assertEqual(str(messages[0]), "Невозможно удалить метку, связанную с задачами.")
         else:
             # Если связанных задач нет, проверьте успешное удаление
-            response = self.client.post(reverse('labels:label_delete', kwargs={'pk': self.test_label.pk}), follow=True)
-            self.assertEqual(response.status_code, 200)  # Проверяем, что запрос успешно выполнен
-            self.assertFalse(Label.objects.filter(name='testlabel').exists())  # Проверяем, что метка удалена
+            response = self.client.post(reverse('labels:label_delete',
+                                                kwargs={'pk': self.test_label.pk}),
+                                        follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertFalse(Label.objects.filter(name='testlabel').exists())
             messages = list(get_messages(response.wsgi_request))
             self.assertEqual(str(messages[0]), "Метка успешно удалена")
-
-

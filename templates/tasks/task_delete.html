@@ -6,7 +6,7 @@
     <form method="post">
         {% csrf_token %}
         <p>{% trans "Вы уверены, что хотите удалить задачу" %} "{{ task.name }}"?</p>
-        <button type="submit" class="btn btn-danger">{% trans "Удалить" %}</button>
+        <button type="submit" class="btn btn-danger">{% trans "Да, удалить" %}</button>
         <a href="{% url 'tasks:tasks_list' %}" class="btn btn-secondary">{% trans "Отмена" %}</a>
     </form>
 </div>

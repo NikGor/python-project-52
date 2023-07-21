@@ -7,7 +7,7 @@ test:
 	poetry run python manage.py test
 
 lint:
-	poetry run flake8 task_manager
+	poetry run flake8
 
 run:
 	poetry run python manage.py runserver

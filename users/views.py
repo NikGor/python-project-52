@@ -27,6 +27,12 @@ class RegisterView(FormView):
         messages.success(self.request, _("Пользователь успешно зарегистрирован"))
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
+
 
 class UpdateUserView(LoginRequiredMixin, FormView):
     form_class = RegisterForm
@@ -44,6 +50,12 @@ class UpdateUserView(LoginRequiredMixin, FormView):
         update_session_auth_hash(self.request, form.instance)
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
+
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     model = User
@@ -53,6 +65,12 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
     def form_valid(self, form):
         messages.success(self.request, _("Пользователь успешно удален"))
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")
+        return super().form_invalid(form)
 
 
 class LoginView(FormView):

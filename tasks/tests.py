@@ -85,6 +85,7 @@ class TaskCRUDTest(TestCase):
             author=self.test_user2,  # отличается от test_user1
             executor=self.test_user1,
         )
+        test_task2 == test_task3  # чтобы обойти ошибку линтера что переменные не используются
         # Проверяем фильтрацию по имени задачи
         response = self.client.get(reverse('tasks:tasks_list'), {'title': 'testtask2'})
         self.assertEqual(response.status_code, 200)

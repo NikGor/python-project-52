@@ -26,22 +26,19 @@ class TaskListView(ListView):
         form = FilterForm(self.request.GET)
 
         if form.is_valid():
-            name_search = form.cleaned_data.get('name')
-            status_filter = form.cleaned_data.get('status')
-            executor_filter = form.cleaned_data.get('executor')
-            label_filter = form.cleaned_data.get('labels')
-            only_mine = form.cleaned_data.get('only_mine')
+            filters = {
+                'name': lambda value: queryset.filter(name__icontains=value),
+                'status': lambda value: queryset.filter(status=value),
+                'executor': lambda value: queryset.filter(executor=value),
+                'label': lambda value: queryset.filter(labels__in=[value]),
+                'only_mine': lambda value: queryset.filter(
+                    author=self.request.user) if value else queryset,
+            }
 
-            if only_mine:
-                queryset = queryset.filter(author=self.request.user)
-            if status_filter is not None:
-                queryset = queryset.filter(status=status_filter)
-            if executor_filter is not None:
-                queryset = queryset.filter(executor=executor_filter)
-            if name_search is not None:
-                queryset = queryset.filter(name__icontains=name_search)
-            if label_filter is not None:
-                queryset = queryset.filter(labels__in=label_filter)
+            for field, filter_func in filters.items():
+                value = form.cleaned_data.get(field)
+                if value is not None:
+                    queryset = filter_func(value)
 
         return queryset
 
@@ -74,7 +71,6 @@ class TaskCreateView(FormView):
         context['users'] = User.objects.all()
         context['labels'] = Label.objects.all()
         return context
-
 
 
 class TaskUpdateView(FormView):

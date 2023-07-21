@@ -22,11 +22,11 @@
     <div class="card-body">
       <div class="text-muted bg-white pb-2 mb-3">
         <div class="d-flex justify-content-between">
-          <div class="small">{% trans "Исполнитель" %}: {{ task.assignee.username }}</div>
+          <div class="small">{% trans "Исполнитель" %}: {{ task.executor.get_full_name|default:task.executor.username }}</div>
           <div class="small">{% trans "Статус" %}: {{ task.status.name }}</div>
         </div>
         <div class="d-flex justify-content-between">
-          <div class="small">{% trans "Автор" %}: {{ task.author.username }}</div>
+          <div class="small">{% trans "Автор" %}: {{ task.author.get_full_name|default:task.author.username }}</div>
           <div class="small">{% trans "Создана" %}: {{ task.created_at|date:"d.m.Y H:i" }}</div>
         </div>
       </div>

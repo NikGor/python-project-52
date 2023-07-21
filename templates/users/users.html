@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">Пользователи</h1>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-hover">
+        <thead class="bg-light">
             <tr>
                 <th>ID</th>
                 <th>{% trans "Имя пользователя" %}</th>
@@ -21,15 +21,16 @@
                 <td>{{ user.get_full_name }}</td>
                 <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
                 <td>
-                <td>
-                <div class="btn-group" role="group" aria-label="Действия">
-                  <a href="{% url 'users:update_user' user.id %}" class="btn btn-link">
-                    <i class="bi bi-pencil text-secondary"></i>
-                  </a>
-                  <a href="{% url 'users:delete_user' user.id %}" class="btn btn-link">
-                    <i class="bi bi-trash text-secondary"></i>
-                  </a>
-                </div>
+<!--<div class="btn-group" role="group" aria-label="Действия">-->
+<!--  <a href="{% url 'users:update_user' user.id %}" class="btn btn-link">-->
+<!--    <i class="bi bi-pencil text-secondary" aria-label="Изменить"></i>-->
+<!--  </a>-->
+<!--  <a href="{% url 'users:delete_user' user.id %}" class="btn btn-link">-->
+<!--    <i class="bi bi-trash text-secondary" aria-label="Удалить"></i>-->
+<!--  </a>-->
+<!--</div>-->
+                    <a href="{% url 'users:update_user' user.id %}">Изменить</a><br>
+                    <a href="{% url 'users:delete_user' user.id %}">Удалить</a>
                 </td>
             </tr>
             {% empty %}

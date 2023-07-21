@@ -19,8 +19,8 @@ class StatusCRUDTest(TestCase):
         response = self.client.post(reverse('statuses:status_create'), {
             'name': 'newstatus',
         })
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
-        self.assertTrue(Status.objects.filter(name='newstatus').exists())  # Проверяем, что статус создан
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Status.objects.filter(name='newstatus').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Статус успешно создан")
 
@@ -29,9 +29,9 @@ class StatusCRUDTest(TestCase):
         response = self.client.post(reverse('statuses:status_update', args=[self.test_status.id]), {
             'name': 'updatedstatus',
         })
-        self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
+        self.assertEqual(response.status_code, 302)
         self.test_status.refresh_from_db()
-        self.assertEqual(self.test_status.name, 'updatedstatus')  # Проверяем, что имя статуса обновлено
+        self.assertEqual(self.test_status.name, 'updatedstatus')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Статус успешно изменен")
 
@@ -39,6 +39,6 @@ class StatusCRUDTest(TestCase):
         self.client.login(username=self.username, password=self.password)
         response = self.client.post(reverse('statuses:status_delete', args=[self.test_status.id]))
         self.assertEqual(response.status_code, 302)  # Проверяем, что произошел редирект
-        self.assertFalse(Status.objects.filter(name='teststatus').exists())  # Проверяем, что статус удален
+        self.assertFalse(Status.objects.filter(name='teststatus').exists())
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Статус успешно удален")
