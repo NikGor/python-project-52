@@ -67,6 +67,14 @@ class TaskCreateView(FormView):
         messages.success(self.request, _('Задача успешно создана'))
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = FilterForm(self.request.GET)
+        context['statuses'] = Status.objects.all()
+        context['users'] = User.objects.all()
+        context['labels'] = Label.objects.all()
+        return context
+
 
 class TaskUpdateView(FormView):
     form_class = TaskForm
