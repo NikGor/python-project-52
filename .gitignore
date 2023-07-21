@@ -25,7 +25,6 @@ coverage.xml
 user_data
 .gitignore
 .env
-migrations/
 db.sqlite3
 data.json
 locale/ru/LC_MESSAGES/get_translation.py
