@@ -35,6 +35,38 @@ class UserCRUDTest(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(str(messages[0]), "Пользователь успешно изменен")
 
+    def test_update_other_user(self):
+        other_user = User.objects.create_user(username='OtherUser', password='OtherUser123')
+        self.client.login(username='DarkSideLord', password='SithLord123')
+        response = self.client.post(reverse('users:update_user', args=[other_user.id]), {
+            'username': 'CrazyHarley',
+            'first_name': 'Харли',
+            'last_name': 'Квинн',
+            'password1': 'Puddin123',
+            'password2': 'Puddin123'
+        })
+        self.assertEqual(response.status_code, 302)
+        other_user.refresh_from_db()
+        self.assertNotEqual(other_user.username, 'NewUsername')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(str(messages[0]), "У вас нет прав для изменения другого пользователя.")
+
+    def test_delete_other_user(self):
+        other_user = User.objects.create_user(username='OtherUser', password='OtherUser123')
+        self.client.login(username='DarkSideLord', password='SithLord123')
+        response = self.client.post(reverse('users:delete_user', args=[other_user.id]), {
+            'username': 'CrazyHarley',
+            'first_name': 'Харли',
+            'last_name': 'Квинн',
+            'password1': 'Puddin123',
+            'password2': 'Puddin123'
+        })
+        self.assertEqual(response.status_code, 302)
+        other_user.refresh_from_db()
+        self.assertNotEqual(other_user.username, 'NewUsername')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(str(messages[0]), "У вас нет прав для изменения другого пользователя.")
+
     def test_delete_user(self):
         self.client.login(username='DarkSideLord', password='SithLord123')
         response = self.client.post(reverse('users:delete_user', args=[self.test_user.id]))

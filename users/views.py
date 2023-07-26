@@ -7,7 +7,7 @@ from .models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
+from .forms import RegisterForm, UserUpdateForm
 from django.utils.translation import gettext as _
 
 
@@ -35,12 +35,12 @@ class RegisterView(FormView):
 
 
 class UpdateUserView(LoginRequiredMixin, FormView):
-    form_class = RegisterForm
+    form_class = UserUpdateForm
     template_name = 'users/update_user.html'
     success_url = reverse_lazy('users:users')
 
     def dispatch(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        self.object = get_object_or_404(User, pk=self.kwargs['pk'])
         if self.request.user == self.object:
             return super().dispatch(request, *args, **kwargs)
         else:
@@ -49,7 +49,7 @@ class UpdateUserView(LoginRequiredMixin, FormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({'instance': get_object_or_404(User, pk=self.kwargs['pk'])})
+        kwargs.update({'instance': self.object})
         return kwargs
 
     def form_valid(self, form):
@@ -62,7 +62,7 @@ class UpdateUserView(LoginRequiredMixin, FormView):
         for field, errors in form.errors.items():
             for error in errors:
                 messages.error(self.request, f"{field}: {error}")
-        return super().form_invalid(form)
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):

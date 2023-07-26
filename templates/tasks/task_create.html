@@ -16,6 +16,7 @@
         <div class="form-group mt-3 col-md-6">
             <label class="form-label" for="id_status">{% trans "Статус" %}</label>
             <select class="form-select" id="id_status" name="status">
+                <option value="" selected> </option>
                 {% for status in statuses %}
                     <option value="{{ status.id }}">{{ status.name }}</option>
                 {% endfor %}
@@ -24,6 +25,7 @@
         <div class="form-group mt-3 col-md-6">
             <label for="id_executor" class="form-label">{% trans "Исполнитель" %}</label>
             <select class="form-select" id="id_executor" name="executor">
+                <option value="" selected> </option>
                 {% for user in users %}
                     <option value="{{ user.id }}">{{ user.get_full_name|default:user.username }}</option>
                 {% endfor %}
