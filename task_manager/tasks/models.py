@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from labels.models import Label
+from task_manager.labels.models import Label
 
 
 class Task(models.Model):

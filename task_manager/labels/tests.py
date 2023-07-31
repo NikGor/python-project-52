@@ -1,8 +1,8 @@
 from django.contrib.messages import get_messages
 from django.urls import reverse
 from django.test import TestCase, Client
-from labels.models import Label
-from users.models import User
+from task_manager.labels.models import Label
+from task_manager.users.models import User
 
 
 class LabelCRUDTest(TestCase):

@@ -1,8 +1,8 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic.edit import FormView, DeleteView
+from django.views.generic.edit import FormView, DeleteView, CreateView, UpdateView
 from django.urls import reverse_lazy
+from task_manager.mixins import CustomLoginRequiredMixin
 from .models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
@@ -17,7 +17,7 @@ class UserListView(View):
         return render(request, 'users/users.html', {'users': users})
 
 
-class RegisterView(FormView):
+class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('login')
@@ -34,23 +34,19 @@ class RegisterView(FormView):
         return super().form_invalid(form)
 
 
-class UpdateUserView(LoginRequiredMixin, FormView):
+class UpdateUserView(CustomLoginRequiredMixin, UpdateView):
+    model = User
     form_class = UserUpdateForm
     template_name = 'users/update_user.html'
     success_url = reverse_lazy('users:users')
 
     def dispatch(self, request, *args, **kwargs):
-        self.object = get_object_or_404(User, pk=self.kwargs['pk'])
+        self.object = self.get_object()
         if self.request.user == self.object:
             return super().dispatch(request, *args, **kwargs)
         else:
             messages.error(self.request, _("У вас нет прав для изменения другого пользователя."))
             return redirect('users:users')
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'instance': self.object})
-        return kwargs
 
     def form_valid(self, form):
         form.save()
@@ -65,7 +61,7 @@ class UpdateUserView(LoginRequiredMixin, FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class DeleteUserView(LoginRequiredMixin, DeleteView):
+class DeleteUserView(CustomLoginRequiredMixin, DeleteView):
     model = User
     template_name = 'users/delete_user.html'
     success_url = reverse_lazy('users:users')

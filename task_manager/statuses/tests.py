@@ -1,8 +1,8 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.messages import get_messages
-from statuses.models import Status
-from users.models import User
+from task_manager.statuses.models import Status
+from task_manager.users.models import User
 
 
 class StatusCRUDTest(TestCase):

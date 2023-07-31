@@ -1,8 +1,8 @@
 from django import forms
 from .models import Task
-from statuses.models import Status
-from users.models import User
-from labels.models import Label
+from task_manager.statuses.models import Status
+from task_manager.users.models import User
+from task_manager.labels.models import Label
 
 
 class TaskForm(forms.ModelForm):

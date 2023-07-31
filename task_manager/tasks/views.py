@@ -1,23 +1,23 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic.edit import FormView, DeleteView
+from django.shortcuts import redirect
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.urls import reverse_lazy
+from task_manager.mixins import CustomLoginRequiredMixin
 from .forms import TaskForm, FilterForm
 from .models import Task
-from statuses.models import Status
-from users.models import User
-from labels.models import Label
+from task_manager.statuses.models import Status
+from task_manager.users.models import User
+from task_manager.labels.models import Label
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
 
-class TaskDetailView(LoginRequiredMixin, DetailView):
+class TaskDetailView(CustomLoginRequiredMixin, DetailView):
     model = Task
     template_name = 'tasks/task_detail.html'
 
 
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(CustomLoginRequiredMixin, ListView):
     model = Task
     template_name = 'tasks/tasks.html'
     context_object_name = 'tasks'
@@ -52,16 +52,14 @@ class TaskListView(LoginRequiredMixin, ListView):
         return context
 
 
-class TaskCreateView(LoginRequiredMixin, FormView):
+class TaskCreateView(CustomLoginRequiredMixin, CreateView):
+    model = Task
     form_class = TaskForm
     template_name = 'tasks/task_create.html'
     success_url = reverse_lazy('tasks:tasks_list')
 
     def form_valid(self, form):
-        task = form.save(commit=False)
-        task.author = self.request.user
-        task.save()
-        form.save_m2m()
+        form.instance.author = self.request.user
         messages.success(self.request, _('Задача успешно создана'))
         return super().form_valid(form)
 
@@ -74,33 +72,25 @@ class TaskCreateView(LoginRequiredMixin, FormView):
         return context
 
 
-class TaskUpdateView(LoginRequiredMixin, FormView):
+class TaskUpdateView(CustomLoginRequiredMixin, UpdateView):
+    model = Task
     form_class = TaskForm
     template_name = 'tasks/task_update.html'
     success_url = reverse_lazy('tasks:tasks_list')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'instance': get_object_or_404(Task, pk=self.kwargs['pk'])})
-        return kwargs
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['task'] = get_object_or_404(Task, pk=self.kwargs['pk'])
         context['statuses'] = Status.objects.all()
         context['labels'] = Label.objects.all()
         context['users'] = User.objects.all()
         return context
 
     def form_valid(self, form):
-        task = form.save(commit=False)
-        task.save()
-        form.save_m2m()
         messages.success(self.request, _('Задача успешно изменена'))
         return super().form_valid(form)
 
 
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
+class TaskDeleteView(CustomLoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/task_delete.html'
     success_url = reverse_lazy('tasks:tasks_list')

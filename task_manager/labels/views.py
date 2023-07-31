@@ -1,14 +1,14 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from task_manager.mixins import CustomLoginRequiredMixin
 from .models import Label
 from .forms import LabelForm, FilterForm
 from django.utils.translation import gettext as _
 
 
-class LabelListView(LoginRequiredMixin, ListView):
+class LabelListView(CustomLoginRequiredMixin, ListView):
     model = Label
     template_name = 'labels/labels.html'
     context_object_name = 'labels'
@@ -26,7 +26,7 @@ class LabelListView(LoginRequiredMixin, ListView):
         return labels
 
 
-class LabelCreateView(LoginRequiredMixin, CreateView):
+class LabelCreateView(CustomLoginRequiredMixin, CreateView):
     model = Label
     form_class = LabelForm
     template_name = 'labels/label_create.html'
@@ -37,7 +37,7 @@ class LabelCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class LabelUpdateView(LoginRequiredMixin, UpdateView):
+class LabelUpdateView(CustomLoginRequiredMixin, UpdateView):
     model = Label
     form_class = LabelForm
     template_name = 'labels/label_update.html'
@@ -48,7 +48,7 @@ class LabelUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class LabelDeleteView(LoginRequiredMixin, DeleteView):
+class LabelDeleteView(CustomLoginRequiredMixin, DeleteView):
     model = Label
     template_name = 'labels/label_delete.html'
     success_url = reverse_lazy('labels:label_list')
