@@ -6,3 +6,4 @@ django-bootstrap4
 dj_database_url
 django-filter
 rollbar
+whitenoise
