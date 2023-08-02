@@ -1,4 +1,3 @@
-import django_filters
 from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.urls import reverse_lazy
@@ -41,6 +40,8 @@ class TaskListView(CustomLoginRequiredMixin, FilterView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        queryset = filterset.qs
         only_mine = self.request.GET.get('only_mine')
         if only_mine:
             queryset = queryset.filter(author=self.request.user)
