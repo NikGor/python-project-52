@@ -1,7 +1,9 @@
 from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.urls import reverse_lazy
+from django_filters.views import FilterView
 from task_manager.mixins import CustomLoginRequiredMixin
+from .filters import TaskFilter
 from .forms import TaskForm, FilterForm
 from .models import Task
 from task_manager.statuses.models import Status
@@ -9,7 +11,7 @@ from task_manager.users.models import User
 from task_manager.labels.models import Label
 from django.contrib import messages
 from django.utils.translation import gettext as _
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView
 
 
 class TaskDetailView(CustomLoginRequiredMixin, DetailView):
@@ -17,31 +19,16 @@ class TaskDetailView(CustomLoginRequiredMixin, DetailView):
     template_name = 'tasks/task_detail.html'
 
 
-class TaskListView(CustomLoginRequiredMixin, ListView):
+class TaskListView(CustomLoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/tasks.html'
     context_object_name = 'tasks'
+    filterset_class = TaskFilter
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        form = FilterForm(self.request.GET)
-
-        if form.is_valid():
-            filters = {
-                'name': lambda value: queryset.filter(name__icontains=value),
-                'status': lambda value: queryset.filter(status=value),
-                'executor': lambda value: queryset.filter(executor=value),
-                'label': lambda value: queryset.filter(labels__in=[value]),
-                'only_mine': lambda value: queryset.filter(
-                    author=self.request.user) if value else queryset,
-            }
-
-            for field, filter_func in filters.items():
-                value = form.cleaned_data.get(field)
-                if value is not None:
-                    queryset = filter_func(value)
-
-        return queryset
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,6 +38,14 @@ class TaskListView(CustomLoginRequiredMixin, ListView):
         context['labels'] = Label.objects.all()
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        queryset = filterset.qs
+        only_mine = self.request.GET.get('only_mine')
+        if only_mine:
+            queryset = queryset.filter(author=self.request.user)
+        return queryset
 
 class TaskCreateView(CustomLoginRequiredMixin, CreateView):
     model = Task
