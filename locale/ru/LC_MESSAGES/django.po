@@ -26,39 +26,39 @@ msgstr "Creation Date"
 
 #: labels/views.py:43
 msgid "Метка успешно изменена"
-msgstr "Метка успешно изменена"
+msgstr "Label successfully changed"
 
 #: labels/views.py:55
 msgid "Невозможно удалить метку, связанную с задачами."
-msgstr "Невозможно удалить метку, связанную с задачами."
+msgstr "Cannot delete a label linked to tasks."
 
 #: labels/views.py:58
 msgid "Метка успешно удалена"
-msgstr "Метка успешно удалена"
+msgstr "Label successfully deleted"
 
 #: statuses/views.py:21
 msgid "Статус успешно создан"
-msgstr "Статус успешно создан"
+msgstr "Status successfully created"
 
 #: statuses/views.py:35
 msgid "Статус успешно изменен"
-msgstr "Статус успешно изменен"
+msgstr "Status successfully changed"
 
 #: statuses/views.py:48
 msgid "Статус успешно удален"
-msgstr "Статус успешно удален"
+msgstr "Status successfully deleted"
 
 #: statuses/views.py:50
 msgid "Невозможно удалить статус, потому что он используется"
-msgstr "Невозможно удалить статус, потому что он используется"
+msgstr "Cannot delete status as it is being used"
 
 #: task_manager/views.py:21 users/views.py:81
 msgid "Вы залогинены"
-msgstr "Вы залогинены"
+msgstr "You are logged in"
 
 #: task_manager/views.py:24 users/views.py:84
 msgid "Этот аккаунт отключен."
-msgstr "Этот аккаунт отключен."
+msgstr "This account is disabled."
 
 #: task_manager/views.py:26 users/views.py:86
 #, fuzzy
@@ -68,15 +68,16 @@ msgstr "Delete User"
 
 #: task_manager/views.py:37 users/views.py:97
 msgid "Вы разлогинены"
-msgstr "Вы разлогинены"
+msgstr "You are logged out"
 
 #: tasks/views.py:65
 msgid "Задача успешно создана"
-msgstr "Задача успешно создана"
+msgstr "Task successfully created"
 
 #: tasks/views.py:91
 msgid "Задача успешно изменена"
-msgstr "Задача успешно изменена"
+msgstr "Task successfully changed"
+
 
 #: tasks/views.py:110
 #, fuzzy
@@ -86,7 +87,7 @@ msgstr "Are you sure you want to delete the user?"
 
 #: tasks/views.py:114
 msgid "Задача успешно удалена"
-msgstr "Задача успешно удалена"
+msgstr "Task successfully deleted"
 
 #: templates/labels/label_create.html:6 templates/labels/labels.html:10
 #, fuzzy
@@ -161,7 +162,7 @@ msgstr "Creation Date"
 
 #: templates/labels/labels.html:66
 msgid "Нет меток."
-msgstr "Нет меток."
+msgstr "No labels."
 
 #: templates/statuses/status_create.html:6 templates/statuses/statuses.html:10
 #, fuzzy
@@ -193,11 +194,11 @@ msgstr "Statuses"
 
 #: templates/statuses/statuses.html:41
 msgid "Нет статусов."
-msgstr "Нет статусов."
+msgstr "No statuses."
 
 #: templates/task_manager/index.html:7
 msgid "Добро пожаловать в Illuminate, ваш лучший менеджер задач"
-msgstr "Добро пожаловать в Illuminate, ваш лучший менеджер задач"
+msgstr "Welcome to Illuminate, your best task manager"
 
 #: templates/task_manager/index.html:8
 msgid ""
@@ -205,13 +206,12 @@ msgid ""
 "удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
 " задачи. Будьте организованы и повышайте свою продуктивность!"
 msgstr ""
-"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
-"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
-" задачи. Будьте организованы и повышайте свою продуктивность!"
+"Efficiently manage your tasks with Illuminate. Our user-friendly interface "
+"allows you to easily create, assign, and track tasks. Stay organized and boost your productivity!"
 
 #: templates/task_manager/index.html:10 templates/task_manager/index.html:12
 msgid "Начать"
-msgstr "Начать"
+msgstr "Start"
 
 #: templates/task_manager/index.html:22
 msgid ""
@@ -219,9 +219,8 @@ msgid ""
 "удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
 " задачи. Никогда больше не упускайте важную задачу!"
 msgstr ""
-"Эффективно управляйте своими задачами с помощью Illuminate. Наш интерфейс, "
-"удобный для пользователя, позволяет легко создавать, назначать и отслеживать"
-" задачи. Никогда больше не упускайте важную задачу!"
+"Efficiently manage your tasks with Illuminate. Our user-friendly interface "
+"allows you to easily create, assign, and track tasks. Never miss an important task again!"
 
 #: templates/task_manager/index.html:30
 msgid ""
@@ -229,9 +228,7 @@ msgid ""
 "статусы своим задачам, чтобы указать их прогресс и приоритет. Используйте "
 "метки для категоризации задач по разным критериям."
 msgstr ""
-"Оставайтесь в курсе своих задач с помощью Illuminate. Вы можете назначать "
-"статусы своим задачам, чтобы указать их прогресс и приоритет. Используйте "
-"метки для категоризации задач по разным критериям."
+"Stay on top of your tasks with Illuminate. You can assign statuses to your tasks to indicate their progress and priority. Use labels to categorize tasks based on various criteria."
 
 #: templates/task_manager/index.html:38
 msgid ""
@@ -239,9 +236,7 @@ msgid ""
 "делиться задачами и назначать исполнителей. Более эффективная работа в "
 "команде никогда не была такой простой!"
 msgstr ""
-"Легко сотрудничайте с командой с помощью Illuminate. Вы можете легко "
-"делиться задачами и назначать исполнителей. Более эффективная работа в "
-"команде никогда не была такой простой!"
+"Easily collaborate with your team using Illuminate. You can easily share tasks and assign executors. Teamwork has never been this simple!"
 
 #: templates/task_manager/index.html:46
 msgid ""
@@ -249,9 +244,8 @@ msgid ""
 "создавайте, назначайте и отслеживайте задачи, и повышайте свою "
 "продуктивность с удобными фильтрами."
 msgstr ""
-"Откройте для себя мощь управления задачами с помощью Illuminate. Легко "
-"создавайте, назначайте и отслеживайте задачи, и повышайте свою "
-"продуктивность с удобными фильтрами."
+"Discover the power of task management with Illuminate. Easily create, assign, and track tasks, and boost your productivity with convenient filters."
+
 
 #: templates/task_manager/layout.html:22
 msgid "Пользователи"
@@ -297,7 +291,7 @@ msgstr "Not registered in the system?"
 
 #: templates/tasks/task_create.html:5
 msgid "Создание новой задачи"
-msgstr "Создание новой задачи"
+msgstr ""
 
 #: templates/tasks/task_create.html:9
 #, fuzzy
@@ -307,7 +301,7 @@ msgstr "Tasks"
 
 #: templates/tasks/task_create.html:13 templates/tasks/task_update.html:13
 msgid "Описание:"
-msgstr "Описание:"
+msgstr "Description:"
 
 #: templates/tasks/task_create.html:17 templates/tasks/task_update.html:17
 #, fuzzy
@@ -317,7 +311,7 @@ msgstr "Statuses"
 
 #: templates/tasks/task_create.html:33 templates/tasks/task_update.html:33
 msgid "Исполнитель:"
-msgstr "Исполнитель:"
+msgstr "Executor:"
 
 #: templates/tasks/task_delete.html:5
 #, fuzzy
@@ -333,12 +327,12 @@ msgstr "Are you sure you want to delete the user?"
 
 #: templates/tasks/task_detail.html:7
 msgid "Просмотр задачи"
-msgstr "Просмотр задачи"
+msgstr "Task view"
 
 #: templates/tasks/task_detail.html:25 templates/tasks/tasks.html:34
 #: templates/tasks/tasks.html:78
 msgid "Исполнитель"
-msgstr "Исполнитель"
+msgstr "Executor"
 
 #: templates/tasks/task_detail.html:26 templates/tasks/tasks.html:23
 #: templates/tasks/tasks.html:76
@@ -349,7 +343,7 @@ msgstr "Statuses"
 
 #: templates/tasks/task_detail.html:29 templates/tasks/tasks.html:77
 msgid "Автор"
-msgstr "Автор"
+msgstr "Author"
 
 #: templates/tasks/task_detail.html:30
 #, fuzzy
@@ -359,7 +353,7 @@ msgstr "Create"
 
 #: templates/tasks/task_update.html:5
 msgid "Изменение задачи"
-msgstr "Изменение задачи"
+msgstr "Task update"
 
 #: templates/tasks/tasks.html:10
 #, fuzzy
@@ -381,11 +375,11 @@ msgstr "Labels"
 
 #: templates/tasks/tasks.html:59
 msgid "Только свои задачи"
-msgstr "Только свои задачи"
+msgstr "Only my tasks"
 
 #: templates/tasks/tasks.html:66
 msgid "Показать"
-msgstr "Показать"
+msgstr "Show"
 
 #: templates/tasks/tasks.html:105
 #, fuzzy
@@ -437,11 +431,11 @@ msgstr "Username"
 
 #: users/views.py:20
 msgid "Пользователь успешно зарегистрирован"
-msgstr "Пользователь успешно зарегистрирован"
+msgstr "User successfully registered"
 
 #: users/views.py:35 users/views.py:59
 msgid "Вы не авторизованы! Пожалуйста, выполните вход."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+msgstr "You are not authorized! Please, log in."
 
 #: users/views.py:38 users/views.py:62
 #, fuzzy
